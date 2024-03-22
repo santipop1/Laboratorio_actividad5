@@ -73,13 +73,20 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 27, y)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align= "center", font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
-
+    
+    if not any(hide):
+        # Despliega mensaje de victoria 
+        goto(0, 0)
+        color('blue')
+        write("Ganaste", align="center", font=('Arial', 30, 'normal'))
+        
+        return
 
 shuffle(tiles)
 setup(420, 420, 370, 0)
