@@ -16,7 +16,7 @@ from freegames import path
 
 car = path('car.gif')
 tiles = list(range(32)) * 2
-state = {'mark': None}
+state = {'mark': None, 'taps': 0}
 hide = [True] * 64
 
 
@@ -54,7 +54,8 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-
+  
+    state['taps'] += 1
 
 def draw():
     """Draw image and tiles."""
@@ -76,6 +77,12 @@ def draw():
         goto(x + 27, y)
         color('black')
         write(tiles[mark], align= "center", font=('Arial', 30, 'normal'))
+
+
+    up()
+    goto(-180, 180)  # Posición para mostrar el número de taps
+    color('black')
+    write(f'Taps: {state["taps"]}', font=('Arial', 20, 'normal'))  # Mostramos el número de taps
 
     update()
     ontimer(draw, 100)
